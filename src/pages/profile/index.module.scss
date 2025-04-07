@@ -1,14 +1,101 @@
+@use "../../app/styles/vars" as *;
+
 .profile {
   height: 100vh;
   width: 100%;
   display: flex;
-}
 
-.profile__content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)),
-    #ffffff;
+  &__photos {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__photo {
+    width: 144px;
+    height: 108px;
+    border-radius: 10px;
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 251px;
+
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)),
+      #ffffff;
+
+    gap: 16px;
+  }
+
+  &__title-container {
+    display: flex;
+    justify-content: end;
+    position: relative;
+
+    h1 {
+      margin-right: auto;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 40px;
+      letter-spacing: 0.25px;
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  &__title-button {
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &_type {
+      &_edit {
+        svg path {
+          stroke: $primary-dark;
+        }
+      }
+      &_delete {
+        svg path {
+          stroke: #d72323;
+        }
+      }
+      &_back {
+        position: absolute !important;
+        left: -32px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    span {
+      min-width: 160px;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    li {
+      display: flex;
+      label {
+        min-width: 160px;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
 }

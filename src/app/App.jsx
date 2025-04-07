@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authorize } from "./store/slices/userSlice";
-import { getCompany } from "./store/slices/companySlice";
+import { getCompany, getContact} from "./store/slices/companySlice";
 
 import * as page from "../pages";
 
@@ -15,6 +15,7 @@ function App() {
       dispatch(authorize());
     } else {
       dispatch(getCompany());
+      dispatch(getContact());
     }
   }, []);
 
