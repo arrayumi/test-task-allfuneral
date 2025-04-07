@@ -1,0 +1,13 @@
+.modal {
+  padding: 24px;
+  &__title {
+    margin: 10px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+}

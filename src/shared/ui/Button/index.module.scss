@@ -1,0 +1,58 @@
+@use "../../../app/styles/vars" as *;
+.button {
+  text-transform: none !important;
+  width: 100%;
+  filter: drop-shadow(0px 3px 8px rgba(0, 0, 0, 0.12));
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+
+  font-family: "Poppins";
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  letter-spacing: 0.48px !important;
+
+  color: $primary-dark !important;
+  outline: 1px solid rgba(0, 0, 0, 0.2) !important;
+
+  &:hover {
+    background-color: transparent;
+    color: $secondary-hover !important;
+    svg path {
+      stroke: $secondary-hover;
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(50%, -50%);
+    path {
+      stroke: $primary-dark;
+    }
+  }
+
+  &_active {
+    background-color: $primary-dark !important;
+    color: $primary-white !important;
+
+    &:hover {
+      color: $primary-dark !important;
+      background-color: $primary-hover-08 !important;
+      svg path {
+        stroke: $primary-dark;
+      }
+    }
+
+    &:active {
+      background-color: $primary-hover-03;
+    }
+
+    svg path {
+      stroke: $primary-white;
+    }
+  }
+}

@@ -9,12 +9,30 @@
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+    li {
+      position: relative;
+
+      button {
+        position: absolute !important;
+        right: 8px;
+        top: 8px;
+        width: 28px !important;
+        height: 28px !important;
+        background-color: $primary-dark;
+        border-radius: 8px !important;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+      }
+    }
   }
 
   &__photo {
     width: 144px;
     height: 108px;
     border-radius: 10px;
+    object-fit: cover;
   }
 
   &__content {
@@ -76,6 +94,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    overflow: hidden;
 
     span {
       min-width: 160px;
@@ -88,6 +107,10 @@
 
     li {
       display: flex;
+      padding: 20px 0;
+      align-items: center;
+      height: 45px;
+
       label {
         min-width: 160px;
         font-weight: 400;
@@ -96,6 +119,53 @@
         letter-spacing: 0.25px;
         color: rgba(0, 0, 0, 0.5);
       }
+
+      p {
+        padding: 12px 13px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: 0.3px;
+
+        color: rgba(0, 0, 0, 0.8);
+      }
     }
   }
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.modal {
+  min-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fields {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+   h5 {
+    margin-right: 5px;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
 }
