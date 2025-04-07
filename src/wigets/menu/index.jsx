@@ -13,7 +13,6 @@ import { Sidebar } from "./Sidebar";
 
 export const Menu = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
-  console.log(openSidebar);
 
   return (
     <>

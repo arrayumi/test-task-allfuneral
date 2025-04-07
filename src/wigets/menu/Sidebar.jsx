@@ -7,7 +7,7 @@ import { PROCESS_MANAGER_BUTTONS } from "../../app/constants";
 export const Sidebar = ({ openSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+
   return (
     <Collapse orientation="horizontal" in={openSidebar}>
       <div className={styles.menu__sidebar}>

@@ -1,7 +1,23 @@
 import { Routes, Route } from "react-router-dom";
+
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { authorize } from "./store/slices/userSlice";
+import { getCompany } from "./store/slices/companySlice";
+
 import * as page from "../pages";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!localStorage.getItem("access")) {
+      dispatch(authorize());
+    } else {
+      dispatch(getCompany());
+    }
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<page.Profile />}>
