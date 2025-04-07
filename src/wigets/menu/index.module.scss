@@ -19,10 +19,35 @@
   &__sidebar-title-container {
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    h2 {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 24px;
+
+      letter-spacing: 0.3px;
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.24px;
+
+      color: rgba(0, 0, 0, 0.8);
+    }
   }
 
   &__sidebar-caption {
     margin-top: auto;
+
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0.24px;
+
+    color: rgba(0, 0, 0, 0.3);
+    text-align: center;
   }
 
   &__sidebar-buttons {
@@ -47,6 +72,14 @@
     color: $primary-dark !important;
     outline: 1px solid rgba(0, 0, 0, 0.2) !important;
 
+    &:hover {
+      background-color: transparent;
+      color: $secondary-hover !important;
+      svg path {
+        stroke: $secondary-hover;
+      }
+    }
+
     svg {
       width: 16px;
       height: 16px;
@@ -62,6 +95,19 @@
     &_active {
       background-color: $primary-dark !important;
       color: $primary-white !important;
+
+      &:hover {
+        color: $primary-dark !important;
+        background-color: $primary-hover-08 !important;
+        svg path {
+          stroke: $primary-dark;
+        }
+      }
+
+      &:active {
+        background-color: $primary-hover-03;
+      }
+
       svg path {
         stroke: $primary-white;
       }
@@ -78,21 +124,34 @@
 
     li:nth-of-type(4) {
       margin-top: auto;
-      svg {
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+
+      &::after {
+        content: "";
+        width: 20px;
+        position: absolute;
+        height: 1px;
+        top: -20px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $primary-hover-02;
       }
     }
   }
 
   &__button {
+    &:hover {
+      background: $primary-hover-01 !important;
+      border-radius: 8px !important;
+    }
+
     svg {
       width: 20px;
       height: 20px;
     }
 
     &_active {
-      background: rgba(255, 255, 255, 0.2) !important;
+      background: $primary-hover-02 !important;
       border-radius: 8px !important;
     }
   }

@@ -22,7 +22,7 @@ export const Sidebar = ({ openSidebar }) => {
                 className={`${styles["menu__sidebar-button"]} ${
                   location.pathname === button.path
                     ? styles["menu__sidebar-button_active"]
-                    : ""
+                    : null
                 }`}
                 onClick={() => navigate(button.path)}
               >

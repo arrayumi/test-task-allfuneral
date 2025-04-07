@@ -26,7 +26,7 @@ export const Menu = () => {
           <li>
             <IconButton
               className={`${styles.menu__button} ${
-                openSidebar ? styles["menu__button_active"] : ""
+                openSidebar ? styles["menu__button_active"] : null
               }`}
               onClick={() => setOpenSidebar(!openSidebar)}
             >
