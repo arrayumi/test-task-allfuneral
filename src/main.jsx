@@ -12,7 +12,7 @@ import "./app/styles/index.scss";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/test-task-allfuneral">
         <App />
       </BrowserRouter>
     </Provider>
