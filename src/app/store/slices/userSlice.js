@@ -5,16 +5,6 @@ const initialState = {
   isAuthorized: localStorage.getItem("access") ?? false,
 };
 
-const userSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {
-    setIsAuthorized(state, action) {
-      state.isAuthorized = action.payload;
-    },
-  },
-});
-
 export const authorize = createAsyncThunk(
   "user/authorize",
   async function (_, { rejectWithValue }) {
@@ -31,6 +21,22 @@ export const authorize = createAsyncThunk(
     }
   }
 );
+
+const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    setIsAuthorized(state, action) {
+      state.isAuthorized = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(authorize.fulfilled, (state, action) => {
+      state.companyData = action.payload;
+      state.isAuthorized = true;
+    });
+  },
+});
 
 export const { setIsAuthorized } = userSlice.actions;
 
