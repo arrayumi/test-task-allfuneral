@@ -3,11 +3,11 @@ import IconButton from "@mui/material/IconButton";
 
 import { useState } from "react";
 
-import OakTreeLogo from "../../assets/icons/oak-tree-logo.svg?react";
-import Briefcase from "../../assets/icons/briefcase.svg?react";
-import Search from "../../assets/icons/search.svg?react";
-import Settings from "../../assets/icons/settings.svg?react";
-import SignOut from "../../assets/icons/sign-out.svg?react";
+import OakTreeLogo from "@/assets/icons/oak-tree-logo.svg?react";
+import Briefcase from "@/assets/icons/briefcase.svg?react";
+import Search from "@/assets/icons/search.svg?react";
+import Settings from "@/assets/icons/settings.svg?react";
+import SignOut from "@/assets/icons/sign-out.svg?react";
 
 import { Sidebar } from "./Sidebar";
 

@@ -1,16 +1,16 @@
 import styles from "./index.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { getCompanyData } from "../../app/store";
+import { getCompanyData } from "@/app/store";
 
-import { Card } from "../../shared/ui/Card";
-import snakeCaseToText from "../../shared/utils/snakeCaseToText";
+import { Card } from "@/shared/ui/Card";
+import snakeCaseToText from "@/shared/utils/snakeCaseToText";
 
 import { IconButton } from "@mui/material";
-import Edit from "../../assets/icons/edit.svg?react";
-import Trash from "../../assets/icons/trash.svg?react";
-import Arrow from "../../assets/icons/arrow.svg?react";
+import Edit from "@/assets/icons/edit.svg?react";
+import Trash from "@/assets/icons/trash.svg?react";
+import Arrow from "@/assets/icons/arrow.svg?react";
 
-import { Modal } from "../../shared/ui/Modal";
+import { Modal } from "@/shared/ui/Modal";
 import {
   setIsDeleteCompanyModalOpen,
   setIsEditCompanyNameModalOpen,

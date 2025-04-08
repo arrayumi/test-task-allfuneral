@@ -1,6 +1,6 @@
-import Briefcase from "../../assets/icons/briefcase.svg?react";
-import Contractor from "../../assets/icons/contractor.svg?react";
-import Account from "../../assets/icons/account.svg?react";
+import Briefcase from "@/assets/icons/briefcase.svg?react";
+import Contractor from "@/assets/icons/contractor.svg?react";
+import Account from "@/assets/icons/account.svg?react";
 
 export const PROCESS_MANAGER_BUTTONS = [
   {

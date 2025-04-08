@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 import { Collapse, Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { PROCESS_MANAGER_BUTTONS } from "../../app/constants";
+import { PROCESS_MANAGER_BUTTONS } from "@/app/constants";
 
 export const Sidebar = ({ openSidebar }) => {
   const navigate = useNavigate();
