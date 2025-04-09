@@ -4,7 +4,7 @@ import { getCompanyData } from "@/app/store";
 
 import { Card } from "@/shared/ui/Card";
 import snakeCaseToText from "@/shared/utils/snakeCaseToText";
-import { textToSnakeCase } from "@/shared/utils/textToSnakeCase";
+import textToSnakeCase from "@/shared/utils/textToSnakeCase";
 
 import { IconButton } from "@mui/material";
 import Edit from "@/assets/icons/edit.svg?react";
@@ -17,7 +17,13 @@ import {
   setIsEditCompanyNameModalOpen,
 } from "../../app/store/slices/modalsSlice";
 import { getModals } from "../../app/store";
-import { patchCompany, patchContact } from "@/app/store/slices/companySlice";
+import {
+  patchCompany,
+  patchContact,
+  patchCompanyName,
+  deleteCompany,
+  sendNudes,
+} from "@/app/store/slices/companySlice";
 
 import * as ui from "../../shared/ui";
 
@@ -79,6 +85,15 @@ export const Organizations = () => {
     }
   };
 
+  const handleAdd = (files) => {
+    const queryString = Array.from(files).reduce((accumulator, file) => {
+      const param = `file=${encodeURIComponent(file.name)}`;
+      return accumulator ? `${accumulator}&${param}` : param;
+    }, "");
+
+    dispatch(sendNudes({ queryString }));
+  };
+
   useEffect(() => {
     if (companyContact && companyData) {
       setValue("name", companyData.name);
@@ -97,7 +112,6 @@ export const Organizations = () => {
       const formattedCompanyType = companyData.type.map((i) =>
         snakeCaseToText(i)
       );
-      console.log(formattedCompanyType);
       setCompanyTypes(formattedCompanyType);
     }
   }, [companyContact, companyData]);
@@ -255,7 +269,7 @@ export const Organizations = () => {
               </li>
             </ul>
           </Card>
-          <Card title="Photos" withAddButton>
+          <Card title="Photos" withAddButton handleAdd={handleAdd}>
             <ul className={styles["profile__photos"]}>
               {companyData?.photos ? (
                 companyData?.photos.map((photo, index) => {
@@ -285,11 +299,20 @@ export const Organizations = () => {
               <ui.Input {...register("name")} />
               <div className={styles.buttons}>
                 <ui.Button
-                  onClick={() => dispatch(setIsEditCompanyNameModalOpen(false))}
+                  onClick={() => {
+                    dispatch(setIsEditCompanyNameModalOpen(false));
+                  }}
                 >
                   Cancel
                 </ui.Button>
-                <ui.Button style="primary">Save changes</ui.Button>
+                <ui.Button
+                  style="primary"
+                  onClick={() => {
+                    dispatch(patchCompanyName({ name: watch("name") }));
+                  }}
+                >
+                  Save changes
+                </ui.Button>
               </div>
             </div>
           </Modal>
@@ -306,7 +329,12 @@ export const Organizations = () => {
                 >
                   No
                 </ui.Button>
-                <ui.Button style="primary">Yes, remove</ui.Button>
+                <ui.Button
+                  style="primary"
+                  onClick={() => dispatch(deleteCompany())}
+                >
+                  Yes, remove
+                </ui.Button>
               </div>
             </div>
           </Modal>

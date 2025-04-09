@@ -9,7 +9,7 @@ const makeRequest = (url, method, data) => {
   const token = localStorage.getItem("access");
   const headers = {};
   if (token) headers["Authorization"] = `Bearer ${token}`;
-  if (data?.file) {
+  if (data?.queryString) {
     headers["Content-Type"] = "multipart/form-data";
   }
 
@@ -38,7 +38,11 @@ export const deleteCompany = (data) => {
 };
 
 export const addCompanyImage = (data) => {
-  return makeRequest(`/companies/${COMPANY_ID}/image`, "POST", data);
+  return makeRequest(
+    `/companies/${COMPANY_ID}/image?${data.queryString}`,
+    "POST",
+    data
+  );
 };
 
 export const deleteCompanyImage = (imageName) => {

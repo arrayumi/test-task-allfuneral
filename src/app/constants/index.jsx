@@ -6,7 +6,7 @@ export const PROCESS_MANAGER_BUTTONS = [
   {
     title: "Organizations",
     icon: <Briefcase />,
-    path: "/organizations",
+    path: "/organizations/12",
   },
   {
     title: "Contractors",
