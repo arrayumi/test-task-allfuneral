@@ -5,8 +5,6 @@ export const Select = ({ item, setItem, items }) => {
     setItem(event.target.value);
   };
 
-  console.log(items, item);
-
   return (
     <MuiSelect
       labelId="demo-simple-select-label"

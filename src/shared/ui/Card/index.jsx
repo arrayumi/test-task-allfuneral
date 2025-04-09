@@ -13,13 +13,18 @@ export const Card = ({
   withAddButton,
   setIsEditing,
   isEditing,
+  cardType,
+  handleSave,
 }) => {
   const renderButtons = (isEditing) => {
     return isEditing ? (
       <div className={styles.card__buttons}>
         <Button
           className={styles.card__button}
-          onClick={() => setIsEditing(false)}
+          onClick={() => {
+            handleSave(cardType);
+            setIsEditing(false);
+          }}
           startIcon={<Check />}
         >
           Save changes
@@ -42,8 +47,6 @@ export const Card = ({
       </Button>
     );
   };
-
-  console.log(isEditing)
 
   return (
     <section className={styles.card}>

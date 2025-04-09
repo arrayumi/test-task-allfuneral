@@ -4,6 +4,7 @@ import { getCompanyData } from "@/app/store";
 
 import { Card } from "@/shared/ui/Card";
 import snakeCaseToText from "@/shared/utils/snakeCaseToText";
+import { textToSnakeCase } from "@/shared/utils/textToSnakeCase";
 
 import { IconButton } from "@mui/material";
 import Edit from "@/assets/icons/edit.svg?react";
@@ -16,6 +17,7 @@ import {
   setIsEditCompanyNameModalOpen,
 } from "../../app/store/slices/modalsSlice";
 import { getModals } from "../../app/store";
+import { patchCompany, patchContact } from "@/app/store/slices/companySlice";
 
 import * as ui from "../../shared/ui";
 
@@ -25,7 +27,8 @@ import { useEffect, useState } from "react";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-import { DateField } from "@mui/x-date-pickers";
+
+import formatPhone from "@/shared/utils/formatPhoneNumber";
 
 export const Organizations = () => {
   const dispatch = useDispatch();
@@ -38,17 +41,43 @@ export const Organizations = () => {
 
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const {
-    formState: { isValid, isSubmitting },
-    watch,
-    register,
-    setValue,
-  } = useForm({
+  const { watch, register, setValue } = useForm({
     mode: "onChange",
   });
 
   const [entity, setEntity] = useState("");
-  const [companyType, setCompanyType] = useState([]);
+  const [companyTypes, setCompanyTypes] = useState([]);
+
+  const handleSave = (cardType) => {
+    switch (cardType) {
+      case "details": {
+        const mappedTypes = companyTypes.map((i) => textToSnakeCase(i));
+        dispatch(
+          patchCompany({
+            contract: {
+              no: watch("agreementNumber"),
+              issue_date: selectedDate.toISOString(),
+            },
+            businessEntity: entity,
+            type: mappedTypes,
+          })
+        );
+        break;
+      }
+      case "contacts": {
+        const username = watch("username").split(" ");
+        dispatch(
+          patchContact({
+            email: watch("email"),
+            phone: formatPhone.fromPhoneNumberToData(watch("phone")),
+            firstname: username[0],
+            lastname: username[1],
+          })
+        );
+        break;
+      }
+    }
+  };
 
   useEffect(() => {
     if (companyContact && companyData) {
@@ -57,12 +86,21 @@ export const Organizations = () => {
         "username",
         `${companyContact.firstname} ${companyContact.lastname}`
       );
-      setValue("phone", companyContact.phone);
+      setValue(
+        "phone",
+        formatPhone.fromDataToPhoneNumber(companyContact.phone)
+      );
       setValue("email", companyContact.email);
+      setValue("agreementNumber", companyData.contract.no);
+      setSelectedDate(new Date(companyData.contract.issue_date));
+      setEntity(companyData.businessEntity);
+      const formattedCompanyType = companyData.type.map((i) =>
+        snakeCaseToText(i)
+      );
+      console.log(formattedCompanyType);
+      setCompanyTypes(formattedCompanyType);
     }
   }, [companyContact, companyData]);
-
-  console.log(companyData);
 
   return (
     <div className={styles.profile__content}>
@@ -89,10 +127,12 @@ export const Organizations = () => {
             </IconButton>
           </div>
           <Card
+            cardType="details"
             title="Company Details"
             withEditButton
             setIsEditing={setEditCompanyDetails}
             isEditing={editCompanyDetails}
+            handleSave={handleSave}
           >
             <ul className={styles["profile__cards-list"]}>
               <li>
@@ -102,19 +142,27 @@ export const Organizations = () => {
                     <p>
                       {companyData?.contract?.no}
                       <span>{`   /   `}</span>
-                      {companyData?.contract?.issue_date.split("T")[0]}
+                      {companyData?.contract?.issue_date
+                        .split("T")[0]
+                        .split("-")
+                        .reverse()
+                        .join(".")}
                     </p>
                   </>
                 ) : (
                   <div className={styles.fields}>
                     <div className={styles.fields__item}>
                       <label>Agreement number:</label>
-                      <ui.Input sx={{width: "100%"}}/>
+                      <ui.Input
+                        sx={{ width: "100%" }}
+                        {...register("agreementNumber")}
+                      />
                     </div>
                     <div className={styles.fields__item}>
-                      <h5 >Date:</h5>
+                      <h5>Date:</h5>
                       <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
+                          format="dd.MM.yyyy"
                           value={selectedDate}
                           onChange={(newValue) => {
                             setSelectedDate(newValue);
@@ -149,8 +197,8 @@ export const Organizations = () => {
                 <label>Company type:</label>
                 {editCompanyDetails ? (
                   <ui.MultipleSelect
-                    item={companyType}
-                    setItem={setCompanyType}
+                    item={companyTypes}
+                    setItem={setCompanyTypes}
                     items={[
                       "Funeral home",
                       "Logistics services",
@@ -170,10 +218,12 @@ export const Organizations = () => {
             </ul>
           </Card>
           <Card
+            cardType="contacts"
             title="Contacts"
             withEditButton
             setIsEditing={setEditCompanyContacts}
             isEditing={editCompanyContacts}
+            handleSave={handleSave}
           >
             <ul className={styles["profile__cards-list"]}>
               <li>
@@ -189,7 +239,10 @@ export const Organizations = () => {
                 {editCompanyContacts ? (
                   <ui.Input {...register("phone")} />
                 ) : (
-                  <p>{companyContact?.phone}</p>
+                  <p>
+                    {companyContact?.phone &&
+                      formatPhone.fromDataToPhoneNumber(companyContact.phone)}
+                  </p>
                 )}
               </li>
               <li>

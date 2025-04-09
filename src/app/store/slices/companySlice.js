@@ -38,6 +38,38 @@ export const getContact = createAsyncThunk(
   }
 );
 
+export const patchCompany = createAsyncThunk(
+  "company/patchData",
+  async function (data, { rejectWithValue }) {
+    try {
+      await api.patchCompany(data);
+      return data;
+    } catch (err) {
+      const errorData = {
+        message: err.response.data.error,
+        code: err.code,
+      };
+      return rejectWithValue(errorData);
+    }
+  }
+);
+
+export const patchContact = createAsyncThunk(
+  "company/patchContact",
+  async function (data, { rejectWithValue }) {
+    try {
+      await api.patchContact(data);
+      return data;
+    } catch (err) {
+      const errorData = {
+        message: err.response.data.error,
+        code: err.code,
+      };
+      return rejectWithValue(errorData);
+    }
+  }
+);
+
 const companySlice = createSlice({
   name: "company",
   initialState,
@@ -57,6 +89,19 @@ const companySlice = createSlice({
       state.errMessage = action.payload?.message || "error";
     });
 
+    builder.addCase(patchCompany.fulfilled, (state, action) => {
+      state.companyData = { ...state.companyData, ...action.payload };
+    });
+    builder.addCase(patchCompany.rejected, (state, action) => {
+      state.errMessage = action.payload?.message || "error";
+    });
+
+    builder.addCase(patchContact.fulfilled, (state, action) => {
+      state.companyContact = { ...state.companyContact, ...action.payload };
+    });
+    builder.addCase(patchContact.rejected, (state, action) => {
+      state.errMessage = action.payload?.message || "error";
+    });
   },
 });
 
