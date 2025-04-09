@@ -1,5 +1,6 @@
 # SPA on React + Redux + MUI with auto auth, sidebar and data handling
 
+### [Deploy](https://arrayumi.github.io/test-task-allfuneral)
 ### [Figma](https://www.figma.com/design/mDhF4C999VbnrIokrHvovQ/AFS---Test-Assignment--Copy-?node-id=8726-10718&t=sNXpXeKoFf9XKxm2-0)
 ### [Task](https://github.com/arrayumi/test-task-allfuneral/blob/master/task.md)
 
