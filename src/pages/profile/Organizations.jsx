@@ -6,7 +6,8 @@ import { Card } from "@/shared/ui/Card";
 import snakeCaseToText from "@/shared/utils/snakeCaseToText";
 import textToSnakeCase from "@/shared/utils/textToSnakeCase";
 
-import { IconButton } from "@mui/material";
+import { IconButton, Box, CircularProgress } from "@mui/material";
+
 import Edit from "@/assets/icons/edit.svg?react";
 import Trash from "@/assets/icons/trash.svg?react";
 import Arrow from "@/assets/icons/arrow.svg?react";
@@ -340,7 +341,9 @@ export const Organizations = () => {
           </Modal>
         </>
       ) : (
-        <p>Loading...</p>
+        <Box sx={{display: "flex", justifyContent: "center", height: "100%", alignItems: "center"}}>
+          <CircularProgress />
+        </Box>
       )}
     </div>
   );
