@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,11 +10,9 @@ import * as page from "../pages";
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { isAuthorized } = useSelector(getUserData);
 
   useEffect(() => {
-    navigate("/");
     if (!isAuthorized) {
       dispatch(authorize());
     } else {
@@ -33,6 +31,8 @@ function App() {
         <Route path="/contractors" element={<page.Contractors />}></Route>
         <Route path="/clients" element={<page.Clients />}></Route>
       </Route>
+
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
