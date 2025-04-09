@@ -12,7 +12,7 @@ import "./app/styles/index.scss";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <HashRouter basename="/test-task-allfuneral">
+      <HashRouter >
         <App />
       </HashRouter>
     </Provider>
