@@ -1,12 +1,18 @@
-# React + Vite
+# SPA on React + Redux + MUI with auto auth, sidebar and data handling
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### [Figma](https://www.figma.com/design/mDhF4C999VbnrIokrHvovQ/AFS---Test-Assignment--Copy-?node-id=8726-10718&t=sNXpXeKoFf9XKxm2-0)
+### [Task](https://github.com/arrayumi/test-task-allfuneral/blob/master/task.md)
 
-Currently, two official plugins are available:
+This is test task for allfuneral.com.
+Still slightly unfinished, have no time for:
+- error handling
+- component decomposition 
+- pixel-perfect layout
+- scss files refactoring
+- images uploading and rendering
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Easter egg inside of one of the AsyncThunks for the most attentive
 
-## Expanding the ESLint configuration
+## Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```JavaScript```, ```React```, ```Redux```, ```MUI```, ```Axios```
